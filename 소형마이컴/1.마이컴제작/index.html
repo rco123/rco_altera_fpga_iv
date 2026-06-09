@@ -20,7 +20,7 @@
     
     
       
-        <title>1.마이컴설계 - FPGA 설계 (RCO ALTERA FPGA IV KIT)</title>
+        <title>1.마이컴제작 - FPGA 설계 (RCO ALTERA FPGA IV KIT)</title>
       
     
     
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1.마이컴설계
+              1.마이컴제작
             
           </span>
         </div>
@@ -452,7 +452,7 @@
           
   
   <span class="md-ellipsis">
-    1.마이컴설계
+    1.마이컴제작
   </span>
   
 
@@ -463,7 +463,7 @@
         
   
   <span class="md-ellipsis">
-    1.마이컴설계
+    1.마이컴제작
   </span>
   
 
@@ -883,8 +883,11 @@
                   
 
 
-<h1 id="_1">마이컴 설계</h1>
+<h1 id="_1">마이컴 제작</h1>
+<p>간단한 마이컴을 제작하기 위해서 필요한 구성요소들에 대한 설명을 한다.</p>
 <h2 id="_2">어셈블리 언어</h2>
+<p>마이컴을 실제적으로 구동하기 위한 기계어 위의 언어로써, 사람이 알아볼수 있고 프로그램을 작성할수 있은 프로그래밍 언어이다.</p>
+<p>ASM을 기본으로 마이컴을 동작하도록 한다.</p>
 <pre><code class="language-asm">
 LOAD 10      ; R0 = 5
 
@@ -907,7 +910,7 @@ JMP END_ON  ; 무한 반복
 
 </code></pre>
 <h2 id="cpu">CPU 구성</h2>
-<p>CPU 내부의 구성은 다음과 같다.</p>
+<p>CPU 내부의 구성은 다음과 같다. 주요 CPU블록 기능중 현재 필요한 기능은 아래와 같다.</p>
 <ul>
 <li>PC</li>
 <li>ROM</li>
@@ -917,20 +920,21 @@ JMP END_ON  ; 무한 반복
 <li>R0</li>
 </ul>
 <h2 id="_3">명령어</h2>
-<p>0x1 LOAD n <br>
-0x2 INC <br>
-0x3 DEC<br>
-0x4 JMP addr<br>
-0x5 JZ addr<br>
-0x6 JNZ addr<br>
-0x7 LED_ON<br>
-0x8 LED_OFF<br>
-0x9 DELAY n<br></p>
+<p>프로그램을 구동하기 위한 ASM 프래그램 명령어 SET를 구성한다.</p>
+<pre><code>0x1 LOAD n &lt;br&gt;
+0x2 INC &lt;br&gt;
+0x3 DEC&lt;br&gt;
+0x4 JMP addr&lt;br&gt;
+0x5 JZ addr&lt;br&gt;
+0x6 JNZ addr&lt;br&gt;
+0x7 LED_ON&lt;br&gt;
+0x8 LED_OFF&lt;br&gt;
+0x9 DELAY n&lt;br&gt;
+</code></pre>
 <h2 id="_4">컴파일러</h2>
-<p>어셉블리로 작성된 프로그램을 명령어 코드로 변환된 기계어 언어로 변환해주는 프로그램</p>
+<p>직접 지정한 어셉블리 언어로 작성된 프로그램을 명령어 코드로 변환된 기계어 언어로 변환해주는 프로그램</p>
 <pre><code class="language-bash">
 python asmtohex.py led.asm 
-
 
 </code></pre>
 <h2 id="_5">프로그램 다운로드</h2>
@@ -938,6 +942,7 @@ python asmtohex.py led.asm
 <pre><code>python hexsend.py led.hex
 
 </code></pre>
+<hr />
 
 
 
