@@ -1,0 +1,35 @@
+.md-typeset .md-typeset__table {
+    width: 100% !important;
+}
+
+.md-typeset .md-typeset__table table {
+    width: 100% !important;
+    display: table !important;
+    table-layout: fixed;
+}
+
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+    padding: 10px 16px;
+}
+
+.md-typeset table:not([class]) tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+
+
+.image-row {
+    display:flex;
+    gap:20px;
+}
+
+.image-box {
+    text-align:center;
+}
+
+.image-box img {
+    height:220px !important;
+    width:auto !important;
+    max-width:none !important;
+}

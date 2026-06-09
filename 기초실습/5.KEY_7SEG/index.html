@@ -1,0 +1,1028 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../4.7SEG/">
+      
+      
+        <link rel="next" href="../6.CLK_7SEG/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.36">
+    
+    
+      
+        <title>5.KEY_7SEG - FPGA 설계 (RCO ALTERA FPGA IV KIT)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.06209087.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#key-in-7seg" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="FPGA 설계 (RCO ALTERA FPGA IV KIT)" class="md-header__button md-logo" aria-label="FPGA 설계 (RCO ALTERA FPGA IV KIT)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FPGA 설계 (RCO ALTERA FPGA IV KIT)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5.KEY_7SEG
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="FPGA 설계 (RCO ALTERA FPGA IV KIT)" class="md-nav__button md-logo" aria-label="FPGA 설계 (RCO ALTERA FPGA IV KIT)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    FPGA 설계 (RCO ALTERA FPGA IV KIT)
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    시작하기
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    기초실습
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            기초실습
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.LEDONOFF/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.LEDONOFF
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.IN_OUT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.IN_OUT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.CLK/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.CLK
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.7SEG/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.7SEG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    5.KEY_7SEG
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    5.KEY_7SEG
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pin" class="md-nav__link">
+    <span class="md-ellipsis">
+      PIN 테이블
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vhdl" class="md-nav__link">
+    <span class="md-ellipsis">
+      VHDL 코드
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.CLK_7SEG/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.CLK_7SEG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7.MODE_SW/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7.MODE_SW
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    마이컴설계
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            마이컴설계
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%EC%86%8C%ED%98%95%EB%A7%88%EC%9D%B4%EC%BB%B4/1.%EB%A7%88%EC%9D%B4%EC%BB%B4%EC%84%A4%EA%B3%84/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.마이컴설계
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%EC%86%8C%ED%98%95%EB%A7%88%EC%9D%B4%EC%BB%B4/2.cmd_set/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.명령어구성
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%EC%86%8C%ED%98%95%EB%A7%88%EC%9D%B4%EC%BB%B4/3.%EC%96%B4%EC%85%88%EB%B8%94%EB%9F%AC%EC%9E%91%EC%84%B1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.어셈블러작성
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%EC%86%8C%ED%98%95%EB%A7%88%EC%9D%B4%EC%BB%B4/4.%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC%EC%9E%91%EC%84%B1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.컴파일러작성
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%EC%86%8C%ED%98%95%EB%A7%88%EC%9D%B4%EC%BB%B4/5.%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%8D%94%EC%9E%91%EC%84%B1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.다운로더작성
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%EC%86%8C%ED%98%95%EB%A7%88%EC%9D%B4%EC%BB%B4/6.FPGA%EC%A0%9C%EC%9E%91/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.FPGA제작
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%EC%86%8C%ED%98%95%EB%A7%88%EC%9D%B4%EC%BB%B4/7.%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%8B%A4%EC%8A%B5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7.프로그램실습
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    MATLAB/SIMULINK
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            MATLAB/SIMULINK
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simulink/1.%EB%AA%A8%EB%8D%B8%EA%B8%B0%EB%B0%98%EC%84%A4%EA%B3%84/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.FPGA모델기반설계
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simulink/2.%EA%B8%B0%EB%8A%A5%EC%A0%95%EC%9D%98/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.기능정의
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simulink/3.%EC%8B%9C%EB%AE%AC%EB%A7%81%ED%81%AC%EC%9E%91%EC%84%B1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.시뮬링크작성
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simulink/4.VHDL%EC%BD%94%EB%93%9C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.VHDL코드생성
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pin" class="md-nav__link">
+    <span class="md-ellipsis">
+      PIN 테이블
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vhdl" class="md-nav__link">
+    <span class="md-ellipsis">
+      VHDL 코드
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="key-in-7seg">KEY IN 7SEG</h1>
+<p>실습키트의 키의 입력을 받아, 7SEGMENT으로 출력, 출력이 정상적으로 되는지 확인한다.</p>
+<div class="image-row">
+    <div class="image-box">
+    <img src="../imgs/key_in.png">
+        <div><b>Keypad</b></div>
+    </div>
+
+    <div class="image-box">
+    <img src="../imgs/seg.png">
+        <div><b>7-Segment</b></div>
+    </div>
+</div>
+
+<h2 id="pin">PIN 테이블</h2>
+<table>
+<thead>
+<tr>
+<th>핀 번호</th>
+<th>신호</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PIN_AA13</td>
+<td>led_out[0]</td>
+</tr>
+<tr>
+<td>PIN_AA14</td>
+<td>led_out[1]</td>
+</tr>
+<tr>
+<td>PIN_AA15</td>
+<td>led_out[2]</td>
+</tr>
+<tr>
+<td>PIN_AA16</td>
+<td>led_out[3]</td>
+</tr>
+<tr>
+<td>PIN_AA17</td>
+<td>led_out[4]</td>
+</tr>
+<tr>
+<td>PIN_AA18</td>
+<td>led_out[5]</td>
+</tr>
+<tr>
+<td>PIN_AA19</td>
+<td>led_out[6]</td>
+</tr>
+<tr>
+<td>PIN_AA20</td>
+<td>led_out[7]</td>
+</tr>
+<tr>
+<td>PIN_AB14</td>
+<td>seg[6]</td>
+</tr>
+<tr>
+<td>PIN_AB15</td>
+<td>seg[5]</td>
+</tr>
+<tr>
+<td>PIN_AB16</td>
+<td>seg[4]</td>
+</tr>
+<tr>
+<td>PIN_AB17</td>
+<td>seg[3]</td>
+</tr>
+<tr>
+<td>PIN_AB18</td>
+<td>seg[2]</td>
+</tr>
+<tr>
+<td>PIN_AB19</td>
+<td>seg[1]</td>
+</tr>
+<tr>
+<td>PIN_AB20</td>
+<td>seg[0]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vhdl">VHDL 코드</h2>
+<pre><code class="language-vhdl">
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity seg_out is
+   port(
+      seg     : out std_logic_vector(6 downto 0);   -- 7-세그 출력 (g~a)
+      led_out : out std_logic_vector(0 to 7)        -- 기존 인덱스(0 to 7)
+   );
+end seg_out;
+
+architecture SegmentDecoder of seg_out is
+    signal key : integer range 0 to 15 := 5;  -- 표시할 숫자 (0~15)
+begin
+    ----------------------------------------------------------------
+    -- with-select: key 값 → seg 패턴 매핑 (VHDL-93 호환)
+    ----------------------------------------------------------------
+    with key select
+        seg &lt;=
+            &quot;100&quot; &amp; &quot;0000&quot; when 0,   -- 0
+            &quot;111&quot; &amp; &quot;1001&quot; when 1,   -- 1
+            &quot;010&quot; &amp; &quot;0100&quot; when 2,   -- 2
+            &quot;011&quot; &amp; &quot;0000&quot; when 3,   -- 3
+            &quot;001&quot; &amp; &quot;1001&quot; when 4,   -- 4
+            &quot;001&quot; &amp; &quot;0010&quot; when 5,   -- 5
+            &quot;000&quot; &amp; &quot;0010&quot; when 6,   -- 6
+            &quot;111&quot; &amp; &quot;1000&quot; when 7,   -- 7
+            &quot;000&quot; &amp; &quot;0000&quot; when 8,   -- 8
+            &quot;001&quot; &amp; &quot;0000&quot; when 9,   -- 9
+            &quot;000&quot; &amp; &quot;1000&quot; when 10,  -- A
+            &quot;000&quot; &amp; &quot;0011&quot; when 11,  -- b
+            &quot;100&quot; &amp; &quot;0110&quot; when 12,  -- C
+            &quot;010&quot; &amp; &quot;0001&quot; when 13,  -- d
+            &quot;000&quot; &amp; &quot;0110&quot; when 14,  -- E
+            &quot;000&quot; &amp; &quot;1110&quot; when 15,  -- F
+            &quot;111&quot; &amp; &quot;1111&quot; when others;  -- blank
+
+    ----------------------------------------------------------------
+    -- LED 개별 비트 설정: 기존 코드 그대로 유지
+    ----------------------------------------------------------------
+    led_out(7) &lt;= '1';  -- LED 7번 ON
+    led_out(6) &lt;= '1';
+    led_out(5) &lt;= '1';
+    led_out(4) &lt;= '0';  -- LED 4번 ON
+    led_out(3) &lt;= '0';
+    led_out(2) &lt;= '0';
+    led_out(1) &lt;= '1';
+    led_out(0) &lt;= '1';  -- LED 0번 ON
+
+end architecture;
+
+</code></pre>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
